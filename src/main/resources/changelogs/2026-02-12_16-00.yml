@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - objectQuotingStrategy: QUOTE_ALL_OBJECTS
+  - changeSet:
+      id: word-sanitizer-app-initial
+      author: brian.chifamba
+      changes:
+        - createTable:
+            tableName: SensitiveWords
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pkSensitiveWords
+                    nullable: false
+              - column:
+                  name: word
+                  type: character varying(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: isActive
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dateCreated
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastUpdated
+                  type: timestamp
+                  constraints:
+                    nullable: true
+        - addUniqueConstraint:
+            constraintName: uniqueSensitiveWordsWord
+            tableName: SensitiveWords
+            columnNames: word
+        - addDefaultValue:
+            tableName: SensitiveWords
+            columnName: id
+            defaultValueComputed: NEXT VALUE FOR primary_sequence

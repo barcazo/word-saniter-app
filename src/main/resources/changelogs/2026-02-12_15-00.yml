@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: word-sanitizer-app-sequence
+      author: brian.chifamba
+      changes:
+        - createSequence:
+            cycle: false
+            incrementBy: 1
+            sequenceName: primary_sequence
+            startValue: 10000
